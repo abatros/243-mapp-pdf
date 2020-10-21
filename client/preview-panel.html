@@ -1,0 +1,39 @@
+<template name="preview_panel">
+
+<vbox id="preview-panel"
+  class="a-panel _hidden"
+  style="width:1000px; border:3px solid yellow; margin:0;
+    _height:100%; height:100vh;
+    position:absolute;
+    ">
+
+
+<div class="hbox-qj">
+  <a class="js-search-list" href="/">back to list</a>
+  <h1>Preview Panel</h1>
+  <span></span>
+</div>
+
+<!--
+<iframe
+src="https://docs.google.com/viewerng/viewer?url=http://infolab.stanford.edu/pub/papers/google.pdf&embedded=true"
+frameborder="0" height="100%" width="100%">
+</iframe>
+-->
+
+<!--
+<iframe
+src="https://docs.google.com/viewerng/viewer?url=https://ultimheat.com/s3-museum/2004%20Fonderies%20de%20fer%20et%20poeleries.pdf#page=96&embedded=true"
+frameborder="0" height="100%" width="100%">
+</iframe>
+-->
+
+<iframe
+src="{{href}}"
+frameborder="0" height="100%" width="100%"
+style="background-color:#eaead6;">
+</iframe>
+
+
+</vbox>
+</template>

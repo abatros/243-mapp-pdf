@@ -1,0 +1,92 @@
+<head>
+	<style>
+	  em {
+	    color:blue; font-weight: bold;
+	  }
+	  h3 {
+	    font-size: 11pt;
+	  }
+
+	.nodisplay {
+		display:none;
+	}
+	.hidden {
+		visibility:hidden;
+	}
+
+</style>
+</head>
+
+
+<template name="search_panel">
+
+<vbox id="search-panel"
+  class="a-panel _hidden"
+  style="width:1000px; border:3px solid yellow; margin:0;
+    _height:100%; height:100vh;
+    position:absolute;
+    background-color: lightgray;
+    ">
+
+<!-- h1
+style="background-color:rgb(170,170,170); opacity:0.5; margin:0; line-height:50px;">Search Panel</h1 -->
+
+
+  <div id="search-input">
+    <div class="top-infos" style="display:flex;margin-bottom:3px;">
+      <div class="js-clear-search-results" style="cursor:pointer;font-weight:bold;margin-right:10px;">[ CLEAR ]</div>
+      <div class="js-busy-flag hidden">SEARCHING...</div>
+      <div style="margin-left:auto">
+        <b style="color:brown;">DEEP-SEARCH</b> &mdash;
+        <span class="js-max_results_reached nodisplay" style="margin:0;padding:0;">{{__ 'over-500'}} </span>{{subIndex_Count.get}} {{__ 'entries'}}
+      </div>
+    </div>
+
+
+    <input type="text" class="cc-typeahead js-deep-search"
+      placeholder="{{__ 'deep-search-on-pdf' pdfCount pdfpagesCount }}"
+      onfocus="this.placeholder = ''"
+      onblur="this.placeholder = '{{__ 'deep-search-on-pdf' pdfCount pdfpagesCount }}'"
+      />
+
+  </div>
+
+
+
+<vbox style="overflow-y:auto; flex-grow:1;">
+  {{#each it in slist}}
+  <div style="border-bottom:1px solid darkgray; padding-bottom:5px;margin:5px 50px;">
+    <h3>
+      {{#if it.pageno}}
+      <a style="display:none" href="/pdf/?id={{it.url}}&page={{it.pageno}}">{{it.xid}} (p. {{it.pageno}}) ::{{it.rank}}</a>
+
+      <a class="js-preview"
+        href='https://ultimheat.com/s3-museum/{{it.xid}}#page={{it.pageno}}&view=FitH,top'
+        target="anotherTab"
+        title="Article">
+        <!--[{{it.rank}}]-->
+        {{{it.title}}}
+      </a>
+
+      {{else}}
+
+      <!-- MD-search (pageno ==0) && (data !=null) -->
+
+      <span class="pdf-page">
+        <a href="https://ultimheat.com/museum-s3/{{it.href}}.html"
+        target="anotherTab"
+        title='HTML-file-{{it.href}}'
+        >
+        <!--[{{it.rank}}]-->
+        {{{it.title}}}
+        </a>
+      </span>
+      {{/if}}
+    </h3>
+    <p style="font-family:times; font-size:12pt; width:100%;">{{{split_newlines it.fragments}}}</p>
+    </div>
+    {{/each}}
+  </vbox>
+</vbox>
+
+</template>
